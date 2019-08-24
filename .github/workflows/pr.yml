@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - run: jq --raw-output '.action' $GITHUB_EVENT_PATH
     - uses: actions/checkout@v1
     - run: |
         echo "Ref: $GITHUB_REF"
