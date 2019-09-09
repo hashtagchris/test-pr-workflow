@@ -6,6 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: |
+        echo "Repo: $GITHUB_REPOSITORY"
         echo "Ref: $GITHUB_REF"
         echo "Sha: $GITHUB_SHA"
     - run: ls
