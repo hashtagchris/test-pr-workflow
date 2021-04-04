@@ -12,3 +12,5 @@ jobs:
     - run: cat $GITHUB_EVENT_PATH
     - run: |
         echo "PR number: `jq '.number' $GITHUB_EVENT_PATH`"
+    - run: |
+        echo $${ toJson(runner) }}
