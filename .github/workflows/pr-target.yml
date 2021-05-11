@@ -12,6 +12,8 @@ jobs:
 
       - run: ls -la .
 
+      - run: cat ./README.md
+
       - run: git log -n 10
 
       - name: Run a one-line script
