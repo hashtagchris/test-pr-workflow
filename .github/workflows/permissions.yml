@@ -1,0 +1,46 @@
+name: "Test permissions"
+on:
+  pull_request:
+    types: [opened,reopened,closed,synchronize]
+  workflow_dispatch:
+
+jobs:
+  issues-read:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: read
+    steps:
+      - name: list issues
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const issues = await github.paginate(
+              github.issues.listForRepo,
+              { owner: context.repo.owner, repo: context.repo.repo },
+              (response) => response.data.map((issue) => { return { number: issue.number, title: issue.title } }))
+              
+            console.log(`issue count: ${issues.length}`)
+            
+            for (const issue of issues) {
+              console.log(`#${issue.number}: ${issue.title}`)            
+            }
+
+  issues-none:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: none
+    steps:
+      - name: list issues
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const issues = await github.paginate(
+              github.issues.listForRepo,
+              { owner: context.repo.owner, repo: context.repo.repo },
+              (response) => response.data.map((issue) => { return { number: issue.number, title: issue.title } }))
+              
+            console.log(`issue count: ${issues.length}`)
+            
+            for (const issue of issues) {
+              console.log(`#${issue.number}: ${issue.title}`)            
+            }
