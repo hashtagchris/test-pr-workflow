@@ -2,7 +2,7 @@ name: pull_request with branch filters test
 on:
   pull_request:
     branches:
-      - '**'
+      - 'bobby'
 
 jobs:
   build:
